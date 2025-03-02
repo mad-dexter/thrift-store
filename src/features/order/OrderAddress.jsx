@@ -15,8 +15,7 @@ function OrderAddress({ setSelectedAddress }) {
     <StyledProfileContainer>
       <div>
         {isAddressLoading && <SpinnerMini />}
-        {addresses?.length === 0 && <span>No addresses added.</span>}
-        {addresses?.length > 0 && (
+        {!isAddressLoading && (
           <AddressList
             addresses={addresses}
             showDelete={false}

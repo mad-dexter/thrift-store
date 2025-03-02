@@ -5,6 +5,7 @@ import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 import { formatCurrency } from "../../utils/helpers";
 import { useCreateCartItem } from "../cart/useCreateCartItem";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const StyledProduct = styled.div`
   background-color: white;
@@ -65,9 +66,15 @@ function ProductItem({ product }) {
   return (
     <StyledProduct isfragile={isFragile.toString()}>
       <Link to={`/details/${productId}`}>
-        <img
+        {/* <img
           src={productImage.at(0).imageUrl}
           alt={`Image of ${productName}`}
+        /> */}
+        <LazyLoadImage
+          src={productImage.at(0).imageUrl}
+          alt={`Image of ${productName}`}
+          placeholderSrc="/assets/placeholder.png"
+          effect="blur"
         />
         <Heading as="h2">{productName}</Heading>
         <p>{shortDescription}</p>

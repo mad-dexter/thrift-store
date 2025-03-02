@@ -44,8 +44,7 @@ function ProfilePage() {
       <div>
         <Heading as="h3">Your Addresses</Heading>
         {isAddressLoading && <SpinnerMini />}
-        {addresses?.length === 0 && <span>No addresses added.</span>}
-        {addresses?.length > 0 && <AddressList addresses={addresses} />}
+        {!isAddressLoading && <AddressList addresses={addresses} />}
       </div>
     </StyledProfileContainer>
   );

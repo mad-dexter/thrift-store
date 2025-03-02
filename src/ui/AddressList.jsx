@@ -22,33 +22,44 @@ const StyledAddressContent = styled.div`
   }
 `;
 
+const StyledNotImportantText = styled.span`
+  color: var(--color-grey-400);
+  font-size: 1.4rem;
+  padding: 0.8rem;
+`;
+
 function AddressList({ addresses, showDelete = true, setSelectedAddress }) {
   return (
     <>
-      <StyledAddressContent>
-        {showDelete &&
-          addresses.map((address) => (
-            <AddressItem
-              address={address}
-              key={address.id}
-              showDelete={showDelete}
-            />
-          ))}
-
-        {!showDelete &&
-          addresses.map((address) => (
-            <div key={address.id}>
-              <input
-                type="radio"
-                id={address.id}
-                name="addressKey"
-                value={address.id}
-                onChange={(e) => setSelectedAddress(e.target.value)}
+      {addresses?.length === 0 && (
+        <StyledNotImportantText>No addresses added.</StyledNotImportantText>
+      )}
+      {addresses?.length > 0 && (
+        <StyledAddressContent>
+          {showDelete &&
+            addresses.map((address) => (
+              <AddressItem
+                address={address}
+                key={address.id}
+                showDelete={showDelete}
               />
-              <AddressItem address={address} showDelete={showDelete} />
-            </div>
-          ))}
-      </StyledAddressContent>
+            ))}
+
+          {!showDelete &&
+            addresses.map((address) => (
+              <div key={address.id}>
+                <input
+                  type="radio"
+                  id={address.id}
+                  name="addressKey"
+                  value={address.id}
+                  onChange={(e) => setSelectedAddress(e.target.value)}
+                />
+                <AddressItem address={address} showDelete={showDelete} />
+              </div>
+            ))}
+        </StyledAddressContent>
+      )}
 
       <Modal>
         <Modal.Open opens="createAddress">
